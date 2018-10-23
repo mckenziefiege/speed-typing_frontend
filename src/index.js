@@ -55,23 +55,25 @@ document.addEventListener('DOMContentLoaded', () => {
     el.focus();
   }
 
-  function compareSpans () {
-    let correctCounter = 0
-    let incorrectCounter = 0
-    let spanCount = promptDiv.querySelectorAll('span').length
-    for (let i = 0; i < spanCount; i++) {
-      let promptWord = document.querySelector(`#prompt-${i}`).innerText
-      const userWord = document.querySelector(`#word-${i}`).innerText
-      if (promptWord === userWord) {
-        ++correctCounter
-        console.log(correctCounter)
-      }
-      else {
-        ++incorrectCounter
-      }
-      debugger
-    }
-  }
+  // function compareSpans () {
+  //   let correctCounter = 0
+  //   let incorrectCounter = 0
+  //   let spanCount = promptDiv.querySelectorAll('span').length
+  //   for (let i = 0; i < spanCount; i++) {
+  //     let promptWord = document.querySelector(`#prompt-${i}`).innerText
+  //     const userWord = document.querySelector(`#word-${i}`).innerText
+  //     if (promptWord === userWord) {
+  //       const nextWord = document.querySelector(`#prompt-${i + 1}`)
+  //       nextWord.style.color = 'magenta'
+  //       ++correctCounter
+  //       console.log(correctCounter)
+  //     }
+  //     else {
+  //       ++incorrectCounter
+  //     }
+  //     debugger
+  //   }
+  // }
 
   function myFunction() {
     console.log("Does this work")
