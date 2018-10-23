@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 function setCaretLast(el) {
-    // let el = document.getElementById(el);
+    var el = document.getElementById(el);
     let range = document.createRange();
     let sel = window.getSelection();
     range.setStart(el.childNodes[el.childNodes.length-1], 1);
@@ -50,5 +50,5 @@ function setCaretLast(el) {
     sel.removeAllRanges();
     sel.addRange(range);
     el.focus();
-}
+  }
 })
