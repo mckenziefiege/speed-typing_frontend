@@ -14,5 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const p = document.createElement('p')
     p.innerText = randomPrompt.content
     promptDiv.append(p)
-  }
+    let spaces = randomPrompt.content.split(" ")
+    spaces.forEach (function(word) {
+
+      let punctuationSplit = word.split("[.,!?:;’\“-]+\\s*")
+
+        })
+    })
+}
 })
