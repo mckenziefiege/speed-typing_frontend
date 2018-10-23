@@ -25,14 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let userTextbox = document.getElementById('user-textbox')
+  userTextbox.addEventListener('click', timer());
   userTextbox.addEventListener('keydown', function (event) {
+
     if (event.keyCode == 32) {
-      console.log("clicked space")
       event.target.innerHTML = wrapWords(this.innerText)
       setCaretLast(this.id)
       compareSpans()
-
-      // console.log(this.innerHTML)
     }
   });
 
@@ -69,9 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
       let promptWord = document.querySelector(`#prompt-${i}`).innerText
       let userWord = document.querySelector(`#word-${i}`).innerText
       const nextWord = document.querySelector(`#prompt-${i}`)
-      console.log("promptword:", promptWord)
-      console.log("userword:", userWord)
-
       nextWord.style.color = 'gray'
       if (promptWord === userWord) {
         ++correctCounter
@@ -85,6 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const highlighted = document.querySelector(`#prompt-${i + 1}`)
       highlighted.style.color = 'blue'
     }
+  }
+
+  function timer() {
+    var sec = 61;
+    var timer = setInterval(function(){
+      document.getElementById('safeTimerDisplay').innerHTML = sec;
+      sec--;
+      if (sec < 0) {
+        clearInterval(timer);
+      }
+    }, 1000);
   }
 
 }); //end brackets
