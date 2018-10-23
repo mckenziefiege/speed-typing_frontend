@@ -27,8 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let userTextbox = document.getElementById('user-textbox')
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
+      console.log("clicked space")
       event.target.innerHTML = wrapWords(this.innerText)
       setCaretLast(this.id)
+      compareSpans()
+
       // console.log(this.innerHTML)
     }
   });
@@ -55,28 +58,33 @@ document.addEventListener('DOMContentLoaded', () => {
     el.focus();
   }
 
-  // function compareSpans () {
-  //   let correctCounter = 0
-  //   let incorrectCounter = 0
-  //   let spanCount = promptDiv.querySelectorAll('span').length
-  //   for (let i = 0; i < spanCount; i++) {
-  //     let promptWord = document.querySelector(`#prompt-${i}`).innerText
-  //     const userWord = document.querySelector(`#word-${i}`).innerText
-  //     if (promptWord === userWord) {
-  //       const nextWord = document.querySelector(`#prompt-${i + 1}`)
-  //       nextWord.style.color = 'magenta'
-  //       ++correctCounter
-  //       console.log(correctCounter)
-  //     }
-  //     else {
-  //       ++incorrectCounter
-  //     }
-  //     debugger
-  //   }
-  // }
+  function compareSpans () {
+    const promptDiv = document.querySelector(".prompt-div")
+    let correctCounter = 0
+    let incorrectCounter = 0
+    let spanCount = promptDiv.querySelectorAll('span').length
+    for (let i = 0; i < spanCount; i++) {
+      // let firstPromptWord = document.querySelector('#prompt-0').innerText
+      // firstPromptWord.style.color = 'magenta'
+      let promptWord = document.querySelector(`#prompt-${i}`).innerText
+      let userWord = document.querySelector(`#word-${i}`).innerText
+      const nextWord = document.querySelector(`#prompt-${i}`)
+      console.log("promptword:", promptWord)
+      console.log("userword:", userWord)
 
-  function myFunction() {
-    console.log("Does this work")
+      nextWord.style.color = 'gray'
+      if (promptWord === userWord) {
+        ++correctCounter
+        console.log(`correct: ${correctCounter}`)
+      }
+      else {
+        nextWord.style.color = 'red'
+        ++incorrectCounter
+        console.log(`incorrect: ${incorrectCounter}`)
+      }
+      const highlighted = document.querySelector(`#prompt-${i + 1}`)
+      highlighted.style.color = 'blue'
+    }
   }
 
 }); //end brackets
