@@ -2,8 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const promptDiv = document.querySelector(".prompt-div")
   fetchMainPrompt()
 
-
-  function fetchMainPrompt() {
+  function fetchMainPrompt () {
   fetch('http://localhost:3000/prompts')
   .then(res => res.json())
   .then(putPromptOnPage)
@@ -12,24 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
   function putPromptOnPage (prompts) {
     let randomPrompt = prompts[Math.floor(Math.random()*prompts.length)];
     const p = document.createElement('p')
-    let spaces = randomPrompt.content.split(" ")
-    spaces.forEach (function(word) {
-
-      let punctuationSplit = word.split("[.,!?:;’\“-]+\\s*")
-      const span = document.createElement('span')
-      span.innerHTML = ` ${punctuationSplit} `
+    let spaces = randomPrompt.content.replace( /\n/g, ' ').split(' ')
+    let arrayOfWords = spaces.filter(word => word !== "")
+    let count = arrayOfWords.length
+    for (let i = 0; i < count; i++) {
+      let span = document.createElement('span')
+      span.id = `prompt-${i}`
+      span.innerText = ` ${arrayOfWords[i]} `
       p.append(span)
-      promptDiv.append(p)
-    })
+    }
+    promptDiv.append(p)
   }
+
   let userTextbox = document.getElementById('user-textbox')
-  userTextbox.addEventListener('keydown', function(event) {
+  userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
       event.target.innerHTML = wrapWords(this.innerText)
       setCaretLast(this.id)
       console.log(this.innerHTML)
     }
-  })
+  });
 
   function wrapWords (text) {
     let splitText = text.split(' ')
@@ -37,18 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let count = splitText.length
     for (let i = 0; i < count; i++) {
       output[i] = "<span id=\"word-"+i+"\">"+splitText[i]+"</span>"
+      console.log(output[i])
     }
     return output.join(' ')
-}
+  }
 
-function setCaretLast(el) {
-    // let el = document.getElementById(el);
+  function setCaretLast (el) {
+    var el = document.getElementById(el);
     let range = document.createRange();
     let sel = window.getSelection();
-    range.setStart(el.childNodes[el.childNodes.length-1], 1);
+    range.setStart(el.childNodes[el.childNodes.length - 1], 1);
     range.collapse(true);
     sel.removeAllRanges();
     sel.addRange(range);
     el.focus();
-}
-})
+  }
+});
