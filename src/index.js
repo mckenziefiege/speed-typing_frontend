@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const promptDiv = document.querySelector(".prompt-div")
   fetchMainPrompt()
+  .then(compareSpans)
 
   function fetchMainPrompt () {
-  fetch('http://localhost:3000/prompts')
+  return fetch('http://localhost:3000/prompts')
   .then(res => res.json())
   .then(putPromptOnPage)
   }
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < count; i++) {
       let span = document.createElement('span')
       span.id = `prompt-${i}`
-      span.innerText = ` ${arrayOfWords[i]} `
+      span.innerText = `${arrayOfWords[i]}`
       p.append(span)
     }
     promptDiv.append(p)
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.keyCode == 32) {
       event.target.innerHTML = wrapWords(this.innerText)
       setCaretLast(this.id)
-      console.log(this.innerHTML)
+      // console.log(this.innerHTML)
     }
   });
 
@@ -38,16 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let count = splitText.length
     for (let i = 0; i < count; i++) {
       output[i] = "<span id=\"word-"+i+"\">"+splitText[i]+"</span>"
-      console.log(output[i])
+      // console.log(output[i])
     }
     return output.join(' ')
   }
 
-<<<<<<< HEAD
-function setCaretLast(el) {
-=======
   function setCaretLast (el) {
->>>>>>> 908f82baf48babc26ad2a6d41a669e44a446ce53
     var el = document.getElementById(el);
     let range = document.createRange();
     let sel = window.getSelection();
@@ -57,8 +54,27 @@ function setCaretLast(el) {
     sel.addRange(range);
     el.focus();
   }
-<<<<<<< HEAD
-})
-=======
-});
->>>>>>> 908f82baf48babc26ad2a6d41a669e44a446ce53
+
+  function compareSpans () {
+    let correctCounter = 0
+    let incorrectCounter = 0
+    let spanCount = promptDiv.querySelectorAll('span').length
+    for (let i = 0; i < spanCount; i++) {
+      let promptWord = document.querySelector(`#prompt-${i}`).innerText
+      const userWord = document.querySelector(`#word-${i}`).innerText
+      if (promptWord === userWord) {
+        ++correctCounter
+        console.log(correctCounter)
+      }
+      else {
+        ++incorrectCounter
+      }
+      debugger
+    }
+  }
+
+  function myFunction() {
+    console.log("Does this work")
+  }
+
+}); //end brackets

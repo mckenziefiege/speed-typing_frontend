@@ -2,15 +2,37 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="./src/index.css">
     <title></title>
   </head>
   <body>
     <div class="prompt-div">
 
     </div>
-    <div id="user-textbox" contenteditable>
-      Test
+    <div id="user-textbox" onkeypress="compareSpans()" contenteditable>
+
     </div>
+    <script>
+    function compareSpans () {
+      const promptDiv = document.querySelector(".prompt-div")
+
+      let correctCounter = 0
+      let incorrectCounter = 0
+      let spanCount = promptDiv.querySelectorAll('span').length
+      for (let i = 0; i < spanCount; i++) {
+        let promptWord = document.querySelector(`#prompt-${i}`).innerText
+        let userWord = document.querySelector(`#word-${i}`).innerText
+        if (promptWord === userWord) {
+          ++correctCounter
+          console.log(correctCounter)
+        }
+        else {
+          ++incorrectCounter
+          // console.log(incorrectCounter)
+        }
+      }
+    }
+    </script>
 <script src="./src/index.js" type="text/javascript">
 </script>
   </body>
