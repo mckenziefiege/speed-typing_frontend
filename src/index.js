@@ -6,8 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerDiv = document.querySelector('#safeTimerDisplay')
   let modal = document.querySelector('.modal')
   let modalContent = document.querySelector('.modal-content')
+  const playAgainButton = document.querySelector('.play-again')
 
-  const startGameButton = document.querySelector('#start-game-button')
+  playAgainButton.addEventListener('click', reloadPage)
+  const startGameButton = document.querySelector('#start-game-button'); // User 'login'
   let modalShow = true; //show modal in beginning
   gameDiv.style.display = 'none';
   startGameButton.addEventListener('click', () => {
@@ -17,15 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
       modalContent.style.display = 'block';
       modalContent.addEventListener('click', () => {
       })
-
-    }
-    else {
+    } else {
       modalContent.style.display = 'none';
       gameDiv.style.display = 'block';
       takeUserInput(event);
     }
-  })
+  });
 
+  // Adds new user to database
   function postUserToDatabase () {
     return fetch('http://localhost:3000/users', {
       method: "POST",
@@ -38,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  // Takes User input from 'form'. Has getUserIdFromDatabase and filterUsers
+  // Also fetches main prompt
   function takeUserInput (event) {
     const username = event.target.parentElement.querySelector('#username').value
     const difficultyLevel = event.target.parentElement.querySelector('#difficulty').value
 
-    function getUserIdFromDatabase() {
+    function getUserIdFromDatabase () {
       fetch('http://localhost:3000/users')
       .then(res => res.json())
       .then(filterUsers)
@@ -51,21 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function filterUsers (users) {
       let chosenUser = users.filter(user => user.username === username)
       const p = document.createElement('p')
+      p.className = "the-user-we-need"
       p.id = chosenUser[0].id
-      debugger
+      promptDiv.append(p)
     }
+
     getUserIdFromDatabase()
     fetchMainPrompt()
     .then(compareSpans)
   }
 
-
+  // Fetches the prompt and calls putPromptOnPage
   function fetchMainPrompt () {
   return fetch('http://localhost:3000/prompts')
   .then(res => res.json())
   .then(putPromptOnPage)
   }
 
+  // randomly selects prompt and creates spans for each prompt word
   function putPromptOnPage (prompts) {
     const filteredPrompts = prompts.filter(prompt => prompt.difficulty === `${difficulty.value}`)
     let randomPrompt = filteredPrompts[Math.floor(Math.random()*filteredPrompts.length)];
@@ -82,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     promptDiv.append(p)
   }
 
+  //User starts typing, timer starts and user words go into spans
   let userTextbox = document.getElementById('user-textbox')
   userTextbox.addEventListener('focus', timer)
   userTextbox.addEventListener('keydown', function (event) {
@@ -92,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Wraps user words in span
   function wrapWords (text) {
     let splitText = text.split(' ')
     let output = []
@@ -102,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return output.join(' ')
   }
 
+  // puts cursor at the end of the sentence
   function setCaretLast (el) {
     var el = document.getElementById(el);
     let range = document.createRange();
@@ -113,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el.focus();
   }
 
+  // Compares User span to prompt span.
   function compareSpans () {
     let correctCounter = 0
     let incorrectCounter = 0
@@ -136,35 +146,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Creates timer and posts score to database when timer is up.
   function timer () {
-    var sec = 2;
+    userTextbox.removeEventListener('focus', timer)
+    var sec = 5;
     var timer = setInterval(function () {
       document.getElementById('safeTimerDisplay').innerHTML = sec;
       sec--;
       if (sec < 0) {
         clearInterval(timer);
         let score = correctP.innerText - incorrectP.innerText
-        alert(`Time's up! score: ${score}`)
+        alert(`Time's up! Words Per Minute: ${score}`)
+        userTextbox.blur()
         postGameScoreToDatabase()
+        userTextbox.remove();
       }
     }, 1000);
   }
 
-
-
-  function postGameScoreToDatabase() {
-    debugger
+  // Function that adds score to database
+  function postGameScoreToDatabase () {
     let score = correctP.innerText - incorrectP.innerText
+    let userId = parseInt(document.querySelector('.the-user-we-need').id)
     fetch('http://localhost:3000/gamescores', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "user_id": username.parentElement.id,
+        "user_id": userId,
         "score" : score
       })
     })
+  }
+
+  // Reloads the page when user clicks play again
+  function reloadPage(){
+    location.reload();
   }
 
 }); //end brackets
