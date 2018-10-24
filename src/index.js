@@ -1,8 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
   const promptDiv = document.querySelector(".prompt-div")
+  const gameDiv = document.querySelector('.game-div')
   let correctP = document.querySelector('.correct-number')
   let incorrectP = document.querySelector('.incorrect-number')
   let timerDiv = document.querySelector('#safeTimerDisplay')
+  let modal = document.querySelector('.modal')
+  let modalContent = document.querySelector('.modal-content')
+
+  const startGameButton = document.querySelector('#start-game-button')
+  let modalShow = true; //show modal in beginning
+  gameDiv.style.display = 'none';
+  startGameButton.addEventListener('click', () => {
+    modalShow = !modalShow;
+    if (modalShow) {
+
+      modalContent.style.display = 'block';
+
+      modalContent.addEventListener('submit', () => {
+        console.log("starting game")
+      })
+
+    }
+    else {
+      modalContent.style.display = 'none';
+      gameDiv.style.display = 'block';
+    }
+  })
+
+
   fetchMainPrompt()
   .then(compareSpans)
 
@@ -93,5 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 1000);
   }
+
+function addModalFeatures () {
+  modalContent.inner
+}
 
 }); //end brackets
