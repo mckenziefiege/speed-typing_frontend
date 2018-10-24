@@ -13,23 +13,26 @@ document.addEventListener('DOMContentLoaded', () => {
   startGameButton.addEventListener('click', () => {
     modalShow = !modalShow;
     if (modalShow) {
-
       modalContent.style.display = 'block';
-
-      modalContent.addEventListener('submit', () => {
-        console.log("starting game")
+      modalContent.addEventListener('click', () => {
       })
 
     }
     else {
       modalContent.style.display = 'none';
       gameDiv.style.display = 'block';
+      takeUserInput(event);
     }
   })
 
+  function takeUserInput (event) {
+    const username = event.target.parentElement.querySelector('#username').value
+    const difficultyLevel = event.target.parentElement.querySelector('#difficulty').value
 
-  fetchMainPrompt()
-  .then(compareSpans)
+    fetchMainPrompt()
+    .then(compareSpans)
+  }
+
 
   function fetchMainPrompt () {
   return fetch('http://localhost:3000/prompts')
@@ -38,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function putPromptOnPage (prompts) {
-    let randomPrompt = prompts[Math.floor(Math.random()*prompts.length)];
+    const filteredPrompts = prompts.filter(prompt => prompt.difficulty === `${difficulty.value}`)
+    let randomPrompt = filteredPrompts[Math.floor(Math.random()*filteredPrompts.length)];
     const p = document.createElement('p')
     let spaces = randomPrompt.content.replace( /\n/g, ' ').split(' ')
     let arrayOfWords = spaces.filter(word => word !== "")
@@ -53,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let userTextbox = document.getElementById('user-textbox')
-
   userTextbox.addEventListener('click', timer());
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
