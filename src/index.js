@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let modalShow = true; //show modal in beginning
   gameDiv.style.display = 'none';
   startGameButton.addEventListener('click', () => {
+    postUserToDatabase()
     modalShow = !modalShow;
     if (modalShow) {
       modalContent.style.display = 'block';
@@ -25,10 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  function postUserToDatabase () {
+    return fetch('http://localhost:3000/users', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "username": username.value
+      })
+    })
+  }
+
   function takeUserInput (event) {
     const username = event.target.parentElement.querySelector('#username').value
     const difficultyLevel = event.target.parentElement.querySelector('#difficulty').value
 
+    function getUserIdFromDatabase() {
+      fetch('http://localhost:3000/users')
+      .then(res => res.json())
+      .then(filterUsers)
+    }
+
+    function filterUsers (users) {
+      let chosenUser = users.filter(user => user.username === username)
+      const p = document.createElement('p')
+      p.id = chosenUser[0].id
+      debugger
+    }
+    getUserIdFromDatabase()
     fetchMainPrompt()
     .then(compareSpans)
   }
@@ -57,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let userTextbox = document.getElementById('user-textbox')
-  userTextbox.addEventListener('click', timer());
+  userTextbox.addEventListener('focus', timer)
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
       event.target.innerHTML = wrapWords(this.innerText)
@@ -111,19 +137,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function timer () {
-    var sec = 60;
+    var sec = 2;
     var timer = setInterval(function () {
       document.getElementById('safeTimerDisplay').innerHTML = sec;
       sec--;
       if (sec < 0) {
         clearInterval(timer);
-        alert(`Time's up! score: ${correctP.innerText - incorrectP.innerText}`)
+        let score = correctP.innerText - incorrectP.innerText
+        alert(`Time's up! score: ${score}`)
+        postGameScoreToDatabase()
       }
     }, 1000);
   }
 
-function addModalFeatures () {
-  modalContent.inner
-}
+
+
+  function postGameScoreToDatabase() {
+    debugger
+    let score = correctP.innerText - incorrectP.innerText
+    fetch('http://localhost:3000/gamescores', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "user_id": username.parentElement.id,
+        "score" : score
+      })
+    })
+  }
 
 }); //end brackets
