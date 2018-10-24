@@ -2,7 +2,6 @@
 display: inline-block;
 margin: 2px;
 }
-
 .modal {
     /* display: none; /* Hidden by default */ */
     position: fixed; /* Stay in place */
@@ -21,4 +20,10 @@ margin: 2px;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+}
+
+#user-textbox {
+  border-style: solid;
+   border-width: 1px;
+   margin: 5px;
 }
