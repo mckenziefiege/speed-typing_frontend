@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const promptDiv = document.querySelector(".prompt-div")
   let correctP = document.querySelector('.correct-number')
   let incorrectP = document.querySelector('.incorrect-number')
+  let timerDiv = document.querySelector('#safeTimerDisplay')
   fetchMainPrompt()
   .then(compareSpans)
 
@@ -27,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let userTextbox = document.getElementById('user-textbox')
-  userTextbox.addEventListener('keydown', timer());
+
+  userTextbox.addEventListener('click', timer());
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
       event.target.innerHTML = wrapWords(this.innerText)
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sec--;
       if (sec < 0) {
         clearInterval(timer);
+        alert(`Time's up! score: ${correctP.innerText - incorrectP.innerText}`)
       }
     }, 1000);
   }
