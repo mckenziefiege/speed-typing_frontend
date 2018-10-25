@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let modal = document.querySelector('.modal')
   let modalContent = document.querySelector('.modal-content')
   const playAgainButton = document.querySelector('.play-again')
+  let userTextbox = document.getElementById('user-textbox')
 
   playAgainButton.addEventListener('click', reloadPage)
+
   const startGameButton = document.querySelector('#start-game-button'); // User 'login'
   let modalShow = true; //show modal in beginning
   gameDiv.style.display = 'none';
@@ -22,13 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       modalContent.style.display = 'none';
       gameDiv.style.display = 'block';
-      takeUserInput(event);
+      takeUserInput(event)
     }
   });
-
   // Adds new user to database
   function postUserToDatabase () {
-    return fetch('http://localhost:3000/users', {
+    fetch('http://localhost:3000/users', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getUserIdFromDatabase () {
       fetch('http://localhost:3000/users')
-      .then(res => res.json())
-      .then(filterUsers)
+        .then(res => res.json())
+        .then(filterUsers)
     }
 
     function filterUsers (users) {
@@ -61,8 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     getUserIdFromDatabase()
     fetchMainPrompt()
-    .then(compareSpans)
-  }
+      .then(compareSpans)
+    }
+
 
   // Fetches the prompt and calls putPromptOnPage
   function fetchMainPrompt () {
@@ -88,8 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     promptDiv.append(p)
   }
 
-  //User starts typing, timer starts and user words go into spans
-  let userTextbox = document.getElementById('user-textbox')
+  // User starts typing, timer starts and user words go into spans
   userTextbox.addEventListener('focus', timer)
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
