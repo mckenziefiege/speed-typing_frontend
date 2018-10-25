@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   let currentUser = null
+  let highScore = 0
   const promptDiv = document.querySelector(".prompt-div")
   const gameDiv = document.querySelector('.game-div')
   let correctP = document.querySelector('.correct-number')
@@ -27,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
       postUserToDatabase ()
       fetchMainPrompt()
         .then(compareSpans)
-      // takeUserInput(event)
     }
   });
   // Adds new user to database
@@ -46,34 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function createUserId(user) {
     currentUser = user.id
-    console.log(currentUser)
   }
-
-  // Takes User input from 'form'. Has getUserIdFromDatabase and filterUsers
-  // Also fetches main prompt
-  function takeUserInput (event) {
-    // const username = event.target.parentElement.querySelector('#username').value
-    const difficultyLevel = event.target.parentElement.querySelector('#difficulty').value
-
-    // function getUserIdFromDatabase () {
-    //   fetch('http://localhost:3000/users')
-    //     .then(res => res.json())
-    //     .then(filterUsers)
-    // }
-
-    // function filterUsers (users) {
-    //   let chosenUser = users.filter(user => user.username === username)
-    //   const p = document.createElement('p')
-    //   p.className = "the-user-we-need"
-    //   p.id = chosenUser[0].id
-    //   promptDiv.append(p)
-    //   currentUser = chosenUser
-    // }
-    //
-    // getUserIdFromDatabase()
-
-    }
-
 
   // Fetches the prompt and calls putPromptOnPage
   function fetchMainPrompt () {
@@ -158,28 +131,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Creates timer and posts score to database when timer is up.
   function timer () {
+
     userTextbox.removeEventListener('focus', timer)
-    var sec = 5;
+    var sec = 2;
     var timer = setInterval(function () {
       document.getElementById('safeTimerDisplay').innerHTML = sec;
       sec--;
       if (sec < 0) {
         clearInterval(timer);
         let score = correctP.innerText - incorrectP.innerText
-        alert(`Time's up! Words Per Minute: ${score}`)
-        userTextbox.blur()
         postGameScoreToDatabase()
-        userTextbox.remove();
+        findHighestUserScore()
+        .then(highScore=> {
+          alert(`Time's up! Words Per Minute: ${score}
+          High Score: ${highScore}`)
+          userTextbox.blur()
+          userTextbox.remove();
+        })
       }
     }, 1000);
   }
 
+  function findHighestUserScore () {
+    return fetch('http://localhost:3000/gamescores')
+      .then(res => res.json())
+      .then(filterGameScores)
+  }
+
+  function filterGameScores (scores, highScore) {
+    let array = []
+    scores.map( score => array.push(score.score) )
+    array.sort(function (a, b) {
+      return a - b
+    })
+    highScore = array[array.length - 1]
+    return highScore
+  }
+
+
   // Function that adds score to database
   function postGameScoreToDatabase () {
     let score = correctP.innerText - incorrectP.innerText
-    // let userId = parseInt(document.querySelector('.the-user-we-need').id)
-    // console.log(score)
-    // console.log(userId)
     fetch('http://localhost:3000/gamescores', {
       method: "POST",
       headers: {
