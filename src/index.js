@@ -74,12 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // User starts typing, timer starts and user words go into spans
   userTextbox.addEventListener('focus', timer)
+  // userTextbox.addEventListener('keydown', function(event){
+  //     if (event.keyCode === 46) {
+  //     console.log('pressed delete')
+  //   }
+  // })
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
       event.target.innerHTML = wrapWords(this.innerText)
       setCaretLast(this.id)
       compareSpans()
     }
+    // console.log(event.keyCode)
+    if (event.keyCode === 8) {
+        event.preventDefault()
+      }
   });
 
   // Wraps user words in span
@@ -133,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function timer () {
 
     userTextbox.removeEventListener('focus', timer)
-    var sec = 2;
+    var sec = 60;
     var timer = setInterval(function () {
       document.getElementById('safeTimerDisplay').innerHTML = sec;
       sec--;
