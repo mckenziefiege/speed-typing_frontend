@@ -8,17 +8,9 @@
 display: inline-block;
 margin: 2px;
 }
-.modal {
-    /* display: none; /* Hidden by default */ */
-    position: absolute;; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+body {
+  background-color: #AFDADB;
 }
 .modal-content {
   text-align: center;
@@ -26,8 +18,9 @@ margin: 2px;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 2px solid #888;
   width: 80%;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   position:absolute;
     top: 50%;
     left: 50%;
@@ -35,8 +28,9 @@ margin: 2px;
     height:14em;
     margin-top: -7em; /*set to a negative number 1/2 of your height*/
     margin-left: -15em; /*set to a negative number 1/2 of your width*/
-    border: 1px solid #ccc;
-    background-color: #f3f3f3;
+    border: 10px solid #86B8B9;
+    background-color: #FFFFFF;
+
 }
 
 #user-textbox {
@@ -44,3 +38,32 @@ margin: 2px;
    border-width: 1px;
    margin: 5px;
 }
+
+.container {
+  margin: 15px;
+  background-color: white;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+/* .lefthalf {
+ grid-column: 1;
+ background-color: #FFFFFF;
+}
+
+.righthalf {
+ grid-column: 2;
+ background-color: #D8BFBF;
+} */ */
