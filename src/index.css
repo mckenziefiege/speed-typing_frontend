@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
+@import url('https://fonts.googleapis.com/css?family=Rozha+One');
 
 * {
   font-family: 'Cormorant Garamond', serif;
+}
+
+h1 {
+  font-family: 'Rozha One', serif;
+  font-size: 87px;
+  text-align: center;
+  text-shadow: 2px 2px rgba(0,0,0,0.2)
+
 }
 
 .prompt-div span {
@@ -9,26 +18,39 @@ display: inline-block;
 margin: 2px;
 }
 
+.prompt-div {
+  border-style: solid;
+   border-width: 1px;
+   background-color: white;
+   margin: 20px;
+   padding: 10px;
+   border-radius: 25px;
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+  /* border: 10px solid #86B8B9; */
+}
+
 body {
-  background-color: #AFDADB;
+  background-size: 100%;
+  background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1519120443186-4620c77c7130%3Fixlib%3Drb-0.3.5%26q%3D80%26fm%3Djpg%26crop%3Dentropy%26cs%3Dtinysrgb%26w%3D1080%26fit%3Dmax%26ixid%3DeyJhcHBfaWQiOjEyMDd9%26s%3D40d3294e92ad487cf1470b749619a21d")
 }
 .modal-content {
   text-align: center;
-  line-height: 100px;
+  line-height: 80px;
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  /* padding: 20px; */
   border: 2px solid #888;
+   border-radius: 25px;
   width: 80%;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   position:absolute;
     top: 50%;
     left: 50%;
     width:30em;
-    height:14em;
+    height:10em;
     margin-top: -7em; /*set to a negative number 1/2 of your height*/
     margin-left: -15em; /*set to a negative number 1/2 of your width*/
-    border: 10px solid #86B8B9;
+    /* border: 10px solid #86B8B9; */
     background-color: #FFFFFF;
 
 }
@@ -36,12 +58,22 @@ body {
 #user-textbox {
   border-style: solid;
    border-width: 1px;
-   margin: 5px;
+   margin: 20px;
+   background-color: white;
+   padding: 10px;
+   border-radius: 25px;
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+  /* border: 10px solid #86B8B9; */
 }
+#user-textbox[placeholder]:empty:before{
+  content: attr(placeholder);
+}
+
 
 .container {
   margin: 15px;
-  background-color: white;
+  /* background-color: #AFDADB; */
+
 }
 
 .row {
@@ -58,12 +90,28 @@ body {
   flex: 1;
 }
 
-/* .lefthalf {
- grid-column: 1;
- background-color: #FFFFFF;
+.correct-score-div, .incorrect-score-div, #safeTimerDisplay {
+    border-style: solid;
+    border-width: 1px;
+    margin: 20px;
+    background-color: white;
+    padding: 10px;
+    display: inline;
+    display: block;
+    width: 30%;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-size: 25px;
+    text-align: center;
+    padding-left:
 }
 
-.righthalf {
- grid-column: 2;
- background-color: #D8BFBF;
-} */ */
+.play-again {
+  display: block;
+  width: 15%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+button {
+  font-size: 13px;
+}
