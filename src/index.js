@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerDiv = document.querySelector('#safeTimerDisplay')
   let modal = document.querySelector('.modal')
   let modalContent = document.querySelector('.modal-content')
+  const modalAlert = document.querySelector('.modal-alert')
   const playAgainButton = document.querySelector('.play-again')
   let userTextbox = document.getElementById('user-textbox')
 
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const startGameButton = document.querySelector('#start-game-button'); // User 'login'
   let modalShow = true; //show modal in beginning
   gameDiv.style.display = 'none';
+  playAgainButton.style.display = 'none';
   startGameButton.addEventListener('click', () => {
     modalShow = !modalShow;
     if (modalShow) {
@@ -74,18 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // User starts typing, timer starts and user words go into spans
   userTextbox.addEventListener('focus', timer)
-  // userTextbox.addEventListener('keydown', function(event){
-  //     if (event.keyCode === 46) {
-  //     console.log('pressed delete')
-  //   }
-  // })
+
   userTextbox.addEventListener('keydown', function (event) {
     if (event.keyCode == 32) {
       event.target.innerHTML = wrapWords(this.innerText)
       setCaretLast(this.id)
       compareSpans()
     }
-    // console.log(event.keyCode)
     if (event.keyCode === 8) {
         event.preventDefault()
       }
@@ -142,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function timer () {
 
     userTextbox.removeEventListener('focus', timer)
-    var sec = 60;
+    var sec = 30;
     var timer = setInterval(function () {
       document.getElementById('safeTimerDisplay').innerHTML = sec;
       sec--;
@@ -152,14 +149,41 @@ document.addEventListener('DOMContentLoaded', () => {
         postGameScoreToDatabase()
         findHighestUserScore()
         .then(highScore=> {
-          alert(`Time's up! Words Per Minute: ${score}
-          High Score: ${highScore}`)
+          if (score > highScore) {
+            const alert = document.createElement('div')
+            alert.className = "modal-content"
+            alert.innerHTML = `<p>Time's up! Words Per Minute: ${score*2} <br>
+            New High Score: ${score*2}!</p>`
+            const corgi = document.createElement('img')
+            corgi.src = "https://media.tenor.com/images/00223584188c63b35f8ea408e2e1052d/tenor.gif"
+            alert.append(corgi)
+            modalAlert.append(alert)
+            gameDiv.style.display = 'none';
+            modalAlert.style.display = 'block';
+            playAgainButton.style.display = 'block';
+          alert.append(playAgainButton)
           userTextbox.blur()
-          userTextbox.remove();
+          userTextbox.remove()
+        }
+
+          else {
+            const alert = document.createElement('div')
+            alert.className = "modal-content"
+            alert.innerHTML = `<p>Time's up! Words Per Minute: ${score*2} <br>
+            High Score: ${highScore*2}</p>`
+            modalAlert.append(alert)
+            gameDiv.style.display = 'none';
+            modalAlert.style.display = 'block';
+            playAgainButton.style.display = 'block';
+            alert.append(playAgainButton)
+            userTextbox.blur()
+            userTextbox.remove()
+          }
         })
       }
     }, 1000);
   }
+
 
   function findHighestUserScore () {
     return fetch('http://localhost:3000/gamescores')
