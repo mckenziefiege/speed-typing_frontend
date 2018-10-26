@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
 @import url('https://fonts.googleapis.com/css?family=Rozha+One');
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+
 
 * {
   font-family: 'Cormorant Garamond', serif;
+  /* font-family: 'Special Elite', cursive; */
 }
 
 h1 {
-  font-family: 'Rozha One', serif;
-  font-size: 87px;
+  opacity: 0.7;
+  font-size: 100px;
   text-align: center;
-  text-shadow: 2px 2px rgba(0,0,0,0.2)
-
 }
 
 .prompt-div span {
@@ -19,54 +20,54 @@ margin: 2px;
 }
 
 .prompt-div {
-  border-style: solid;
-   border-width: 1px;
+  /* border-style: solid;
+   border-width: 1px; */
    background-color: white;
    margin: 20px;
    padding: 10px;
-   border-radius: 25px;
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+   border-radius: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   /* border: 10px solid #86B8B9; */
 }
 
 body {
   background-size: 100%;
-  background-image: url("https://slack-imgs.com/?c=1&url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1519120443186-4620c77c7130%3Fixlib%3Drb-0.3.5%26q%3D80%26fm%3Djpg%26crop%3Dentropy%26cs%3Dtinysrgb%26w%3D1080%26fit%3Dmax%26ixid%3DeyJhcHBfaWQiOjEyMDd9%26s%3D40d3294e92ad487cf1470b749619a21d")
+  background-image: url("https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=95618c0e060665fcf0c9e489d8b22982&auto=format&fit=crop&w=1500&q=80");
 }
 .modal-content {
   text-align: center;
-  line-height: 80px;
+  line-height: 50px;
   background-color: #fefefe;
+  padding-top: 30px;
   margin: auto;
-  /* padding: 20px; */
-  border: 2px solid #888;
-   border-radius: 25px;
+  font-size: 20px;
+  /* border: 2px solid #888; */
+  border-radius: 15px;
   width: 80%;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   position:absolute;
     top: 50%;
     left: 50%;
-    width:30em;
-    height:10em;
-    margin-top: -7em; /*set to a negative number 1/2 of your height*/
-    margin-left: -15em; /*set to a negative number 1/2 of your width*/
-    /* border: 10px solid #86B8B9; */
+    width:40em;
+    height:20em;
+    margin-top: -10em;
+    margin-left: -20em;
     background-color: #FFFFFF;
 
 }
 
 #user-textbox {
-  border-style: solid;
-   border-width: 1px;
    margin: 20px;
    background-color: white;
    padding: 10px;
    border-radius: 25px;
-  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
-  /* border: 10px solid #86B8B9; */
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
 #user-textbox[placeholder]:empty:before{
   content: attr(placeholder);
+  opacity: 0.5;
+
 }
 
 
@@ -91,15 +92,13 @@ body {
 }
 
 .correct-score-div, .incorrect-score-div, #safeTimerDisplay {
-    border-style: solid;
-    border-width: 1px;
     margin: 20px;
     background-color: white;
     padding: 10px;
     display: inline;
     display: block;
     width: 30%;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     font-size: 25px;
     text-align: center;
@@ -109,9 +108,12 @@ body {
 .play-again {
   display: block;
   width: 15%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  margin-left: 160px;
+  margin-top: 15px;
+  font-size: 20px;
 }
 
 button {
-  font-size: 13px;
+
 }
