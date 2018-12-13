@@ -1,4 +1,4 @@
-# Turbo Typing 
+# Turbo Typing Frontend
 
 Turbo typing is a speed typing test that counts how many words a user can typing correctly in a minute.
 
