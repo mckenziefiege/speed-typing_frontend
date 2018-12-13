@@ -1,6 +1,6 @@
 # Turbo Typing Frontend
 
-Turbo typing is a speed typing test that counts how many words a user can typing correctly in a minute.
+Turbo typing is a speed typing test that counts how many words a user can type correctly in sixty seconds.
 
 ## Features
 
