@@ -19,6 +19,10 @@ Turbo typing is a speed typing test that counts how many words a user can type c
 
 Application backend and instructions for setup: [Turbo Typing Backend](https://github.com/mckenziefiege/speed-typing)
 
+## Demo Video
+
+[Demo](https://www.youtube.com/watch?v=S0z5vgGLUnI)
+
 ## Screenshots
 
 <img width="1288" alt="screen shot 2018-12-13 at 12 39 31 pm" src="https://user-images.githubusercontent.com/38592156/49956933-712b8700-fed4-11e8-807f-dab3d2b4522f.png">
