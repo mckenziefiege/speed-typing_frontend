@@ -1,6 +1,15 @@
 # Turbo Typing 
 
-Turbo typing is a speed typing test that counts 
+Turbo typing is a speed typing test that counts how many words a user can typing correctly in a minute.
+
+## Features
+
+- Users enter username and select difficult level for typing prompt
+- Press space to move onto next word
+- Words highlighted blue are the words the user is currently typing
+- Words highlighted red are words the user types incorrectly
+- Words that are gray are words the user has typed correctly
+- When time is up, user is given their score (words typed correctly - words typed incorrectly)
 
 ## Backend 
 
