@@ -13,7 +13,7 @@ Turbo typing is a speed typing test that counts how many words a user can typing
 
 ## Built with
 
--JavaScript and custom CSS
+- JavaScript and custom CSS
 
 ## Backend 
 
