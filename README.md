@@ -1,5 +1,7 @@
 # Turbo Typing 
 
+Turbo typing is a speed typing test that counts 
+
 ## Backend 
 
 Application backend and instructions for setup: [Turbo Typing Backend](https://github.com/mckenziefiege/speed-typing)
