@@ -1,6 +1,6 @@
 # Turbo Typing Frontend
 
-Turbo typing is a speed typing test that counts how many words a user can type correctly in sixty seconds.
+Turbo typing is a speed typing test that measures speed and accuracy with three different levels of prompt difficulty.
 
 ## Features
 
@@ -15,7 +15,7 @@ Turbo typing is a speed typing test that counts how many words a user can type c
 
 - JavaScript and custom CSS
 
-## Backend 
+## Backend
 
 Application backend and instructions for setup: [Turbo Typing Backend](https://github.com/mckenziefiege/speed-typing)
 
@@ -31,7 +31,7 @@ Application backend and instructions for setup: [Turbo Typing Backend](https://g
 
 ## Instructions
 
-``` open index.html``` 
+``` open index.html```
 
 ### Contributors
 
