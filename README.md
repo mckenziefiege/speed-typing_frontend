@@ -21,7 +21,7 @@ Application backend and instructions for setup: [Turbo Typing Backend](https://g
 
 ## Demo
 
-[Demo Video](https://www.youtube.com/watch?v=S0z5vgGLUnI)
+[Demo Video](https://www.youtube.com/watch?v=iiVcLsB9t7E&feature=youtu.be)
 
 ## Screenshots
 
