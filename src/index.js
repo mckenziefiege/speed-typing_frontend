@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   // Adds new user to database
   function postUserToDatabase () {
-    fetch('http://localhost:3000/users', {
+    fetch('https://turbo-typing-api.herokuapp.com/users', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fetches the prompt and calls putPromptOnPage
   function fetchMainPrompt () {
-  return fetch('http://localhost:3000/prompts')
+  return fetch('https://turbo-typing-api.herokuapp.com/prompts')
   .then(res => res.json())
   .then(putPromptOnPage)
   }
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function findHighestUserScore () {
-    return fetch('http://localhost:3000/gamescores')
+    return fetch('https://turbo-typing-api.herokuapp.com/gamescores')
       .then(res => res.json())
       .then(filterGameScores)
   }
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function that adds score to database
   function postGameScoreToDatabase () {
     let score = correctP.innerText - incorrectP.innerText
-    fetch('http://localhost:3000/gamescores', {
+    fetch('https://turbo-typing-api.herokuapp.com/gamescores', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
